@@ -1,7 +1,7 @@
 package fr.nkw.zidemcore;
 
-import fr.nkw.zidemcore.Cmd.Mine;
-import fr.nkw.zidemcore.Cmd.Warp;
+import fr.nkw.zidemcore.Cmd.MineCmd;
+import fr.nkw.zidemcore.Cmd.WarpCmd;
 import fr.nkw.zidemcore.Event.PlayerHandler;
 import fr.nkw.zidemcore.Event.MineHandler;
 import fr.nkw.zidemcore.Event.PlayerDataHandler;
@@ -22,17 +22,18 @@ public class Main extends JavaPlugin {
         saveConfig();
 
         Worlds.init();
+        Worlds.saveAllMinesDatas();
 
-        getCommand("warp").setExecutor(new Warp());
-        getCommand("rm").setExecutor(new Mine());
+        getCommand("warp").setExecutor(new WarpCmd());
+        getCommand("rm").setExecutor(new MineCmd());
 
         getServer().getPluginManager().registerEvents(new PlayerHandler(), this);
         getServer().getPluginManager().registerEvents(new MineHandler(), this);
         getServer().getPluginManager().registerEvents(new PlayerDataHandler(), this);
 
         System.out.println("ZideMCore: fully loaded");
-
-        MineHandler.resetMine();
+        
+        MineHandler.autoResetMines();
     }
 
     @Override

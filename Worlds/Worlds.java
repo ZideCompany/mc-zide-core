@@ -1,5 +1,6 @@
 package fr.nkw.zidemcore.Worlds;
 
+import fr.nkw.zidemcore.Entity.Mine.Mine;
 import fr.nkw.zidemcore.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -40,6 +41,8 @@ public class Worlds {
                     .generateStructures(false)
                     .environment(org.bukkit.World.Environment.NORMAL)
             ));
+
+            saveAllMinesDatas();
         }
         if (Bukkit.getWorld(WORLD_NAME_LIBRE) == null) {
             SaveWorldInConfig(Bukkit.createWorld(WorldCreator
@@ -64,5 +67,8 @@ public class Worlds {
         }
     }
 
+    public static void saveAllMinesDatas() {
+        new Mine("a").saveInConfig();
+    }
 
 }

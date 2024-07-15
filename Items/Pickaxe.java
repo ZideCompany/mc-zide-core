@@ -15,8 +15,8 @@ public class Pickaxe {
     private static final String PICKAXE_NAME = "§7§lPioche du débutant";
     private static final String LEVEL_PREFIX = "§1Niveau: §2";
     private static final String XP_PREFIX = "§1XP: §2";
-    private static final int MAX_LEVEL = 10;
-    private static final int XP_PER_LEVEL = 50;
+    private static final int MAX_LEVEL = 1_000;
+    private static final int XP_PER_LEVEL = 1;
 
     private final Player owner;
     private int level;

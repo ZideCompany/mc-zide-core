@@ -1,11 +1,13 @@
 package fr.nkw.zidemcore.Event;
 
 import fr.nkw.zidemcore.Items.Pickaxe;
+import fr.nkw.zidemcore.Main;
 import fr.nkw.zidemcore.Worlds.Worlds;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,6 +15,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -87,6 +90,18 @@ public class PlayerHandler implements Listener {
         }
 
         event.setMessage(msg);
+    }
+
+    public static void updateBlockForPlayers(Block b) {
+        for (Player player : Main.getInstance().getServer().getOnlinePlayers()) {
+            player.sendBlockChange(b.getLocation(), b.getType(), b.getData());
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    player.sendBlockChange(b.getLocation(), b.getType(), b.getData());
+                }
+            }.runTaskLater(Main.getInstance(), 1L);
+        }
     }
 
 }
